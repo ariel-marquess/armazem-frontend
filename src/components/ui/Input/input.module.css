@@ -1,0 +1,19 @@
+.input {
+    background-color: white;
+    border-color: black;
+    border-width: 1px;
+    border-style: solid;
+    height: 60px;
+}
+
+.button {
+    background-color: transparent;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    border-color: black;
+    border-width: 1px;
+    border-style: solid;
+    height: 60px;
+    width: 60px;
+}
