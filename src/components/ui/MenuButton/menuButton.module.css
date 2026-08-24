@@ -1,0 +1,9 @@
+.menu {
+    font-family: var(--sans), serif;
+    background-color: white;
+    border-color: black;
+    border-width: 2px;
+    border-style: solid;
+    height: 30px;
+    width: 650px;
+}

@@ -1,7 +1,9 @@
 .button {
     background-color: #dcdcdc;
+    font-family: var(--sans), sans-serif;
     border-color: black;
-    border-width: 1px;
+    border-width: 2px;
     border-style: solid;
-    height: 80px;
+    height: auto;
+    color: black;
 }

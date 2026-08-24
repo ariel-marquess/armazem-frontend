@@ -1,24 +1,28 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import style from './input.module.css';
 
 export function Input({
-                          placeholder = "Digite algo...",
+                          placeholder = "",
                           width = "570px",
                           type = "text",
                           margin = "0px",
-                          padding = "0px",
+                          disabled = false,
+                          worth = "",
                           onChange}){
     const [showPassword, setShowPassword] = useState(false);
-    const [value, setValue] = useState("");
+    const [value, setValue] = useState(worth);
+
+    useEffect(() => {
+        setValue(worth);
+    }, [worth])
 
     const styleInput = {
         width: width,
-        padding: padding,
         margin: margin
     };
 
     const styleImage = {
-        backgroundImage: `url(${showPassword ? "../../../src/assets/eye-open.png" : "../../../src/assets/eye-closed.png"})`
+        backgroundImage: `url(${showPassword ? "../../../src/assets/eye-closed.png" : "../../../src/assets/eye-open.png"})`
     }
 
     const handleChange = (e) => {
@@ -27,14 +31,16 @@ export function Input({
     }
 
     if (type === "password") {
-        return <div>
+        return <div className={style.boxPassword} style={{
+            width: width,
+            margin: margin}}>
             <input
-                className={style.input}
-                style={styleInput}
+                className={disabled ? style.inputDisabled : style.input}
                 placeholder={placeholder}
                 value={value}
-                type={type}
-                onChange={handleChange}/>;
+                type={`${showPassword ? "text" : "password"}`}
+                disabled={disabled}
+                onChange={handleChange}/>
             <button
                 className={style.button}
                 style={styleImage}
@@ -42,10 +48,11 @@ export function Input({
         </div>
     } else {
         return <input
-            className={style.input}
+            className={disabled ? style.inputDisabled : style.input}
             style={styleInput}
             placeholder={placeholder}
             value={value}
+            disabled={disabled}
             onChange={handleChange}
             type={type}/>;
     }

@@ -1,0 +1,32 @@
+.table {
+    display: block;
+    flex: 1;
+    min-height: 0;
+    overflow-y: auto;
+    overflow-x: hidden;
+    row-gap: 20px;
+    height: 100%;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.line {
+    display: flex;
+    align-items: center;
+    column-gap: 10px;
+    height: auto;
+    width: 100%;
+    margin: 10px 0;
+}
+
+.cell {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    color: black;
+    font-size: 16px;
+    padding: 0 5px 0;
+    box-sizing: border-box;
+    height: 32px;
+}

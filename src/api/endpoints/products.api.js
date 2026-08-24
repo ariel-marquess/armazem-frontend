@@ -17,6 +17,12 @@ export const getById = async (id) => {
 }
 
 export const create = async (product) => {
+    // product = {
+    //      "name": "Produto",
+    //      "quantity": 1,
+    //      "price": 10.00
+    // }
+
     try {
         return await apiClient.post('/products', product);
     } catch (error) {
@@ -40,13 +46,22 @@ export const deleteById = async (id) => {
     }
 }
 
-export const changeQuantity = async (id, quantity) => {
-    const obj = {
-        "quantity": quantity
-    }
+export const changeQuantity = async (id, data) => {
+    // data = {
+    //     "op": "add" | "remove",
+    //     "quantity": 1
+    // }
 
     try {
-        return await apiClient.patch(`/products/${id}`, obj);
+        return await apiClient.patch(`/products/${id}`, data);
+    } catch (error) {
+        throw error;
+    }
+}
+
+export const lastId = async () => {
+    try {
+        return await apiClient.get('/products/lastId');
     } catch (error) {
         throw error;
     }

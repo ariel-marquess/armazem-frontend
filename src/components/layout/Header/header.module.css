@@ -2,17 +2,19 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    border-bottom: 1px solid var(--border);
+    border-bottom: 2px solid;
     background-color: transparent;
     height: 80px;
-    width: 100%;
+    min-width: 100vw;
+    box-sizing: border-box;
+    font-family: var(--sans), sans-serif;
 }
 
 .title {
-    font-family: "Droid Sans", serif;
-    font-size: 50px;
+    font-size: 32px;
     font-weight: bold;
     text-align: left;
     flex: 1;
-    margin: 0;
+    margin: 30px;
+    width: 100%;
 }
