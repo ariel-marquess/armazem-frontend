@@ -17,8 +17,7 @@ export function Table({ products, idSearch }) {
 
     return <div className={style.table}>
         {products.map((product) => {
-            const isEmbroidery = idSearch !== 0 && product.id === idSearch;
-            const borderColor = isEmbroidery ? "#fff600" : "#ffffff";
+            const borderColor = idSearch !== 0 && product.id === idSearch ? "#1a90c7" : "#ffffff";
 
             return <div className={style.line} key={product.id}>
                 <div className={style.cell} style={{

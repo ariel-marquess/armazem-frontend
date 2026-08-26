@@ -19,41 +19,24 @@
     flex: 1;
 }
 
-.boxButtons, .boxView {
+.boxButtons {
     display: flex;
     flex-direction: column;
     width: auto;
     min-height: 100%;
     margin: 0;
-    padding: 0;
-    box-sizing: border-box;
 }
 
-.boxExit {
+.boxError {
     display: flex;
-    justify-content: flex-end;
-    margin-top: auto;
+    align-items: flex-end;
+    height: 100%;
     width: auto;
-    box-sizing: border-box;
 }
 
-.headerTable {
-    display: flex;
-    background-color: #bbbaba;
+.paragraph {
     font-family: var(--sans), sans-serif;
     font-size: 25px;
-    border: 2px solid;
-    margin: 0 0 10px;
-    width: 100%;
-    box-sizing: border-box;
-}
-
-.headerCell {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 30px;
-    padding: 5px 0;
-    font-size: 20px;
-    box-sizing: border-box;
+    padding: 0;
+    margin: 15px 0 5px 0;
 }

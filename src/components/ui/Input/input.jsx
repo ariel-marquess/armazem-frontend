@@ -8,7 +8,8 @@ export function Input({
                           margin = "0px",
                           disabled = false,
                           worth = "",
-                          onChange}){
+                          onChange,
+                          onSearch}){
     const [showPassword, setShowPassword] = useState(false);
     const [value, setValue] = useState(worth);
 
@@ -29,6 +30,14 @@ export function Input({
         setValue(e.target.value);
         if (onChange) onChange(e.target.value);
     }
+
+    const handleKeyDown = (e) => {
+        if (onSearch){
+            if (e.key === 'Enter') {
+                onSearch(value);
+            }
+        }
+    };
 
     if (type === "password") {
         return <div className={style.boxPassword} style={{
@@ -54,6 +63,7 @@ export function Input({
             value={value}
             disabled={disabled}
             onChange={handleChange}
+            onKeyDown={handleKeyDown}
             type={type}/>;
     }
 }

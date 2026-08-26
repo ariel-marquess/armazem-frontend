@@ -1,0 +1,27 @@
+.primeContainer {
+    min-width: 100vw;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+}
+
+.boxContent {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: auto;
+    height: auto;
+    margin: 0;
+    padding: 30px;
+    box-sizing: border-box;
+    border-color: black;
+    border-style: solid;
+    border-width: 2px;
+}
+
+.paragraph {
+    margin: 0 10px 0 10px
+}

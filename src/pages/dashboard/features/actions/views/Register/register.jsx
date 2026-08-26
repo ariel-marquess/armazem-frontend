@@ -1,16 +1,15 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { auth } from "../../../../../utils/util.jsx";
-import { parseString } from "../../../../../utils/util.jsx";
+import { parseString } from "../../../../../../utils/util.jsx";
 import style from '../../styles/actions.module.css';
 
-import { create, lastId } from "../../../../../api/endpoints/products.api.js";
-import { getLastId } from "../../../../../mocks/controllers/control.js";
+import { create, lastId } from "../../../../../../api/controllers/products.api.js";
+import { getLastId } from "../../../../../../mocks/controllers/control.js";
 
-import { Header } from "../../../../../components/layout/Header/header.jsx";
-import { Input } from "../../../../../components/ui/Input/input.jsx";
-import { Button } from "../../../../../components/ui/Button/button.jsx";
-import { ErrorBox } from "../../../../../components/ui/ErrorBox/errorBox.jsx";
+import { Header } from "../../../../../../components/layout/Header/header.jsx";
+import { Input } from "../../../../../../components/ui/Input/input.jsx";
+import { Button } from "../../../../../../components/ui/Button/button.jsx";
+import { ErrorBox } from "../../../../../../components/ui/ErrorBox/errorBox.jsx";
 
 
 export function Register() {
@@ -123,7 +122,9 @@ export function Register() {
                     text="Voltar"
                     onClick={handlerExit}/>
 
-                <ErrorBox textError={error} visible={boxVisible}/>
+                <div className={style.boxError}>
+                    <ErrorBox textError={error} visible={boxVisible}/>
+                </div>
             </div>
         </div>
     </div>

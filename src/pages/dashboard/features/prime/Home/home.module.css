@@ -1,0 +1,59 @@
+.primeContainer {
+    min-width: 100vw;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+}
+
+.boxContent {
+    display: flex;
+    flex: 1;
+    width: 100%;
+    margin: 0;
+    padding: 30px;
+    box-sizing: border-box;
+}
+
+.boxSpacer {
+    flex: 1;
+}
+
+.boxButtons, .boxView {
+    display: flex;
+    flex-direction: column;
+    width: auto;
+    min-height: 100%;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.boxExit {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: auto;
+    width: auto;
+    box-sizing: border-box;
+}
+
+.headerTable {
+    display: flex;
+    background-color: var(--button-color-hover);
+    font-family: var(--sans), sans-serif;
+    font-size: 25px;
+    border: 2px solid;
+    margin: 0 0 10px 0;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.headerCell {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 30px;
+    padding: 5px 0;
+    font-size: 20px;
+    box-sizing: border-box;
+}

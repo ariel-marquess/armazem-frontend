@@ -1,20 +1,17 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { useModal } from "../../../contexts/ModalContext.jsx";
-import { auth } from "../../../utils/util.jsx";
+import { useModal } from "../../../../../../contexts/ModalContext.jsx";
 import style from './check.module.css';
 
-import { getAll } from "../../../api/endpoints/products.api.js";
-import { getProducts } from "../../../mocks/controllers/control.js";
+import { getAll } from "../../../../../../api/controllers/products.api.js";
+import { getProducts } from "../../../../../../mocks/controllers/control.js";
 
-import { Header } from "../../../components/layout/Header/header.jsx";
-import { Button } from "../../../components/ui/Button/button.jsx";
-import { Input } from "../../../components/ui/Input/input.jsx";
-import { Table } from "../../../components/ui/Table/table.jsx";
+import { Header } from "../../../../../../components/layout/Header/header.jsx";
+import { Button } from "../../../../../../components/ui/Button/button.jsx";
+import { Input } from "../../../../../../components/ui/Input/input.jsx";
+import { Table } from "../../../../../../components/ui/Table/table.jsx";
 
 export function Check() {
-    auth();
-
     const [products, setProducts] = useState([]);
     const [search, setSearch] = useState("");
     const [idSearch, setIdSearch] = useState(0);
@@ -38,19 +35,29 @@ export function Check() {
     }
 
     function searchProduct() {
-        const product = products.find(product => product.name === search);
+        const normalizedSearch = search.trim().toLowerCase();
 
-        if (product){
+        if (normalizedSearch === "") {
+            setIdSearch(0);
+            openModal({
+                title: "Campo vazio",
+                text: "Digite o nome de um produto para pesquisar."
+            });
+            return;
+        }
+
+        const product = products.find(product =>
+            product.name.trim().toLowerCase() === normalizedSearch
+        );
+
+        if (product) {
             setIdSearch(product.id);
         } else {
-            if (search !== "") {
-                openModal({
-                    title: "Produto não encontrado",
-                    text: "Você deve gigitar exatamente o nome do produto (respeite o uso de maiúculas, acentos e símbolos)."
-                })
-            } else {
-                setIdSearch(0)
-            }
+            setIdSearch(0);
+            openModal({
+                title: "Produto não encontrado",
+                text: "Nenhum produto com esse nome foi encontrado."
+            });
         }
     }
 
@@ -63,6 +70,7 @@ export function Check() {
                     <Input
                         placeholder="Digite exatamente o nome do produto..."
                         width="710px"
+                        onSearch={searchProduct}
                         onChange={(valor) => setSearch(valor)}/>
 
                     <Button

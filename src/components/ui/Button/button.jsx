@@ -1,6 +1,13 @@
 import style from './button.module.css';
 
-export function Button({text, width = "350px", height = "auto", margin = "10px 0px", padding = "5px", fontSize = "20px", onClick}){
+export function Button({
+                           text,
+                           width = "350px",
+                           height = "auto",
+                           margin = "10px 0px",
+                           padding = "5px",
+                           fontSize = "18px",
+                           onClick}){
     const styleInline = {
         width: width,
         height: height,

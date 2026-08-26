@@ -12,13 +12,3 @@ export const parseString = (num) => {
         return `${num}`;
     }
 }
-
-export const auth = () => {
-    const navigate = useNavigate();
-
-    useEffect(() => {
-        if (localStorage.getItem("token") === null) {
-            navigate("/");
-        }
-    }, [navigate]);
-}

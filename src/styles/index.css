@@ -1,6 +1,12 @@
 :root {
-  --sans: "Jersey 25", "Oswald", "VT323", "Roboto", sans-serif;
+  --sans: "Jersey 25", "Oswald", "VT323", "Roboto";
+
   --backgroud-color: #d9d9d9;
+  --border-color: #000000;
+  --border-color-disabled: #9e9e9e;
+
+  --button-color-hover: #bbbaba;
+  --button-color-active: #4f4f4f;
 }
 
 html,
@@ -16,7 +22,7 @@ body {
 }
 
 #root {
-  font-family: "Jersey 25", "Oswald", "VT323", "Roboto", sans-serif;
+  font-family: var(--sans), sans-serif;
   font-weight: 400;
   font-style: normal;
   min-height: 100vh;
@@ -24,5 +30,5 @@ body {
   display: flex;
   flex-direction: column;
   box-sizing: border-box;
-  background-color: #d9d9d9;
+  background-color: var(--backgroud-color);
 }

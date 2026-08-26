@@ -1,18 +1,15 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { auth } from "../../../utils/util.jsx";
 import style from './home.module.css';
 
-import { getAll } from "../../../api/endpoints/products.api.js";
-import { getProducts } from "../../../mocks/controllers/control.js";
+import { getAll } from "../../../../../api/controllers/products.api.js";
+import { getProducts } from "../../../../../mocks/controllers/control.js";
 
-import { Header } from "../../../components/layout/Header/header.jsx";
-import { Button } from "../../../components/ui/Button/button.jsx";
-import { TableView } from "../../../components/ui/TableView/tableView.jsx";
+import { Header } from "../../../../../components/layout/Header/header.jsx";
+import { Button } from "../../../../../components/ui/Button/button.jsx";
+import { TableView } from "../../../../../components/ui/TableView/tableView.jsx";
 
 export function Home() {
-    auth();
-
     const [products, setProducts] = useState([]);
     const navigate = useNavigate();
 

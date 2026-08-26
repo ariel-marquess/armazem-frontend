@@ -7,3 +7,12 @@
     height: auto;
     color: black;
 }
+
+.button:hover {
+    background-color: #bbbaba;
+    cursor: pointer;
+}
+
+.button:active {
+    background-color: #4f4f4f;
+}

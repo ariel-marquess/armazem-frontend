@@ -1,18 +1,18 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import {auth, parseString} from "../../../../../utils/util.jsx";
+import { parseString } from "../../../../../../utils/util.jsx";
 import style from '../../styles/actions.module.css';
 
-import { getAll, changeQuantity } from "../../../../../api/endpoints/products.api.js";
-import { getProducts } from "../../../../../mocks/controllers/control.js";
+import { changeQuantity, getAll } from "../../../../../../api/controllers/products.api.js";
+import { getProducts } from "../../../../../../mocks/controllers/control.js";
 
-import { Header } from "../../../../../components/layout/Header/header.jsx";
-import { Input } from "../../../../../components/ui/Input/input.jsx";
-import { Button } from "../../../../../components/ui/Button/button.jsx";
-import { MenuButton } from "../../../../../components/ui/MenuButton/menuButton.jsx";
-import { ErrorBox } from "../../../../../components/ui/ErrorBox/errorBox.jsx";
+import { Header } from "../../../../../../components/layout/Header/header.jsx";
+import { MenuButton } from "../../../../../../components/ui/MenuButton/menuButton.jsx";
+import { Input } from "../../../../../../components/ui/Input/input.jsx";
+import { Button } from "../../../../../../components/ui/Button/button.jsx";
+import { ErrorBox } from "../../../../../../components/ui/ErrorBox/errorBox.jsx";
 
-export function Add() {
+export function Remove() {
     const [products, setProducts] = useState([]);
     const [product, setProduct] = useState(null);
 
@@ -37,14 +37,14 @@ export function Add() {
         navigate("/home");
     }
 
-    async function handlerAdd() {
+    async function handlerRemove() {
         if (quantity === "" || !product) {
             setError("Você deve preencher todos os campos.");
             setBoxVisible(true);
         } else {
             try {
                 const response = await changeQuantity(product.id, {
-                    "op": "add",
+                    "op": "remove",
                     "quantity": parseInt(quantity)
                 });
 
@@ -68,7 +68,7 @@ export function Add() {
     }
 
     async function saveAndContinue() {
-        const success = await handlerAdd();
+        const success = await handlerRemove();
 
         if (success) {
             handlerNull();
@@ -76,21 +76,21 @@ export function Add() {
     }
 
     async function saveAndExit() {
-        const success = await handlerAdd();
+        const success = await handlerRemove();
 
-        if (success) {
+        if (success){
             handlerExit();
         }
     }
 
     return <div className={style.primeContainer}>
-        <Header title="ARMAZÉM > ADICIONAR AO ESTOQUE"/>
+        <Header title="ARMAZÉM > REMOVER DO ESTOQUE"/>
         <div className={style.boxContent}>
             <div>
                 <h2 className={style.paragraph} style={{margin: "0 0 5px 0"}}>Produto</h2>
                 <MenuButton objects={products} onChange={(valor) => setProduct(valor)}/>
 
-                <h2 className={style.paragraph}>Quantidade a ser adicionada</h2>
+                <h2 className={style.paragraph}>Quantidade a ser removida</h2>
                 <Input
                     width="650px"
                     onChange={(valor) => setQuantity(valor)}/>
@@ -101,7 +101,7 @@ export function Add() {
                     worth={`R$ ${product?.price ?? 0.0}`}
                     disabled={true}/>
 
-                <h2 className={style.paragraph} style={{color: "#9e9e9e"}}>Código do produto</h2>
+                <h2 className={style.paragraph} style={{color: "#9e9e9e"}}>Código do produto</h2>  {/*Deve ter a cor #9e9e9e*/}
                 <Input
                     width="650px"
                     worth={parseString(product?.id ?? 0)}
@@ -121,7 +121,9 @@ export function Add() {
                     text="Voltar"
                     onClick={handlerExit}/>
 
-                <ErrorBox textError={error} visible={boxVisible}/>
+                <div className={style.boxError}>
+                    <ErrorBox textError={error} visible={boxVisible}/>
+                </div>
             </div>
         </div>
     </div>

@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useModal } from "../../../contexts/ModalContext.jsx";
 import style from './login.module.css';
 
-import { authenticate } from '../../../api/endpoints/users.api.js';
+import { authenticate } from '../../../api/controllers/users.api.js';
 import { authUser } from "../../../mocks/controllers/control.js";
 import { setToken } from "../../../store/appStore.js";
 
