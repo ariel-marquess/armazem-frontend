@@ -1,21 +1,41 @@
-.box {
+.primeContainer {
+    min-height: 100vh;
+    min-width: 100vw;
+    display: grid;
+    grid-template-rows: minmax(0, 1fr) auto minmax(0, 1fr);
+    box-sizing: border-box;
+}
+
+.boxSpacer {
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-start;
+    min-height: 0;
+}
+
+.box, .boxImage {
     display: flex;
     justify-content: center;
     align-items: center;
-    min-width: 100vh;
-    min-height: 100vh;
 }
 
 .container {
-    width: 350px;
-    height: auto;
+    padding: 25px;
+    border-color: black;
+    border-width: 2px;
+    border-style: solid;
+}
+
+.image {
+    width: 70px;
+    height: 70px;
 }
 
 .paragraph {
     font-family: var(--sans), sans-serif;
     font-size: 20px;
     justify-content: left;
-    color: #000000;
+    color: black;
     margin: 0;
     padding: 10px 0 0 5px;
 }

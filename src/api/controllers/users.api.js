@@ -1,13 +1,8 @@
 import { apiClient } from '../client.js';
 
-import { authUser } from "../../mocks/controllers/control.js";  // Para teste da interface
-
 export const authenticate = async (login, password) => {
     try {
-        return await apiClient.post('/users', {
-            'login': login,
-            'password': password
-        });
+        return await apiClient.get(`/users?login=${login}&password=${password}`);
     } catch (error) {
         throw error;
     }

@@ -8,6 +8,8 @@ export function Input({
                           margin = "0px",
                           disabled = false,
                           worth = "",
+                          withButton = false,
+                          revealPassword = true,
                           onChange,
                           onSearch}){
     const [showPassword, setShowPassword] = useState(false);
@@ -39,7 +41,7 @@ export function Input({
         }
     };
 
-    if (type === "password") {
+    if (withButton) {
         return <div className={style.boxPassword} style={{
             width: width,
             margin: margin}}>
@@ -64,6 +66,6 @@ export function Input({
             disabled={disabled}
             onChange={handleChange}
             onKeyDown={handleKeyDown}
-            type={type}/>;
+            type={`${revealPassword ? type : "password"}`}/>;
     }
 }

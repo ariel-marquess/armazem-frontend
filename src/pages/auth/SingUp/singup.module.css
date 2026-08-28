@@ -1,0 +1,94 @@
+.primeContainer {
+    min-height: 100vh;
+    min-width: 100vw;
+    display: grid;
+    grid-template-rows: minmax(0, 1fr) auto minmax(0, 1fr);
+    box-sizing: border-box;
+}
+
+.boxSpacer {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    min-height: 0;
+}
+
+.box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container {
+    margin: 0;
+    padding: 25px;
+    border-color: black;
+    border-width: 2px;
+    border-style: solid;
+}
+
+.boxPassword {
+    margin: 20px 0 0 0;
+    padding: 15px;
+    border-color: black;
+    border-width: 2px;
+    border-style: solid;
+}
+
+.title {
+    font-family: var(--sans), sans-serif;
+    font-size: 30px;
+    font-weight: 600;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    text-align: center;
+}
+
+.paragraph {
+    font-family: var(--sans), sans-serif;
+    font-size: 18px;
+    margin: 20px 0 3px 0;
+    padding: 0;
+}
+
+.checkBox {
+    margin: 10px 0 0 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.label {
+    font-family: var(--sans), sans-serif;
+    font-size: 14px;
+    margin: 0 0 0 5px;
+    padding: 0;
+}
+
+.input {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 14px;
+    height: 14px;
+    border: 2px solid black;
+    border-radius: 2px;
+    cursor: pointer;
+    position: relative;
+}
+
+.input:checked {
+    background-color: var(--backgroud-color);
+}
+
+.input:checked::after {
+    content: "✓";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: black;
+    font-size: 8px;
+    font-weight: 600;
+}
