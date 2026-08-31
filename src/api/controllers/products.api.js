@@ -1,19 +1,11 @@
 import { apiClient } from '../client.js';
 
 export const getAll = async () => {
-    try {
-        return await apiClient.get('/products');
-    } catch (error) {
-        throw error;
-    }
+    return await apiClient.get('/products');
 }
 
 export const getById = async (id) => {
-    try {
-        return await apiClient.get(`/products/${id}`);
-    } catch (error) {
-        throw error;
-    }
+    return await apiClient.get(`/products/${id}`);
 }
 
 export const create = async (product) => {
@@ -23,27 +15,15 @@ export const create = async (product) => {
     //      "price": 10.00
     // }
 
-    try {
-        return await apiClient.post('/products', product);
-    } catch (error) {
-        throw error;
-    }
+    return await apiClient.post('/products', product);
 }
 
 export const update = async (id, product) => {
-    try {
-        return await apiClient.put(`/products/${id}`, product);
-    } catch (error) {
-        throw error;
-    }
+    return await apiClient.put(`/products/${id}`, product);
 }
 
 export const deleteById = async (id) => {
-    try {
-        return await apiClient.delete(`/products/${id}`);
-    } catch (error) {
-        throw error;
-    }
+    return await apiClient.delete(`/products/${id}`);
 }
 
 export const changeQuantity = async (id, data) => {
@@ -52,17 +32,9 @@ export const changeQuantity = async (id, data) => {
     //     "quantity": 1
     // }
 
-    try {
-        return await apiClient.patch(`/products/${id}`, data);
-    } catch (error) {
-        throw error;
-    }
+    return await apiClient.patch(`/products/${id}`, data);
 }
 
 export const lastId = async () => {
-    try {
-        return await apiClient.get('/products/lastId');
-    } catch (error) {
-        throw error;
-    }
+    return await apiClient.get('/products/lastId');
 }

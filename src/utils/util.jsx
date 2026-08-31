@@ -1,6 +1,3 @@
-import { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-
 export const parseString = (num) => {
     if (num < 10) {
         return `000${num}`;
