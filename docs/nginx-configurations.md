@@ -8,7 +8,7 @@ Para alcançarmos esse objetivo precisamos instalar em nosso ecossistema de prod
 
 - Possuir o programa VirtualBox instalado em sua máquina física;
 - Ter quatro máquinas virtuais devidamente configuradas no VirtualBox;
-- Utilizar o sistema operacional [Debian](https://drive.google.com/drive/folders/18OHcenvD4wDcidbX7M_UCOB8A9IsVbcN?usp=sharing) nas máquinas virtuais.
+- Utilizar o sistema operacional <a href="https://drive.google.com/drive/folders/18OHcenvD4wDcidbX7M_UCOB8A9IsVbcN?usp=sharing" target="_blank">Debian</a> nas máquinas virtuais.
 
 > **Observação sobre a rede interna:**  
 > Para o funcionamento esperado na rede interna, considere a seguinte configuração de IP:
@@ -20,7 +20,7 @@ Para alcançarmos esse objetivo precisamos instalar em nosso ecossistema de prod
 >
 > Certifique-se de que a configuração de rede das máquinas virtuais permite a comunicação entre ambas.
 
-Obs.: Neste documento não apresentaremos como configurar as máquinas da API e do banco de dados, os passos para configuração destas já estão documentados no [repositório da API]().
+Obs.: Neste documento não apresentaremos como configurar as máquinas da API e do banco de dados, os passos para configuração destas já estão documentados no <a href="https://github.com/Ricardo-Bessa-dev/Back-End-Sistema-Armazem.git" target="_blank">repositório da API</a>.
 
 ## Configurando máquina do servidor de proxy reverso
 
