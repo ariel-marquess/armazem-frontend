@@ -22,7 +22,7 @@ export function Login({}){
         navigate("/singup");
     }
 
-    function handleSubmit() {
+    async function handleSubmit() {
         if (login === "" || password === "") {
             openModal({
                 title: "Campos vazios",
@@ -30,11 +30,11 @@ export function Login({}){
             });
         } else {
             try {
-                // const response = authenticate(login, password);
-                const response = authUser(login, password);
+                const response = await authenticate(login, password);
+                // const response = authUser(login, password);
 
                 if (response) {
-                    setToken(response.data.token);
+                    localStorage.setItem("token", response.data.token);
                     navigate("/home");
                 }
             } catch (e) {

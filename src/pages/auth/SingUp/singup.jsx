@@ -35,16 +35,16 @@ export function SingUp() {
                     text: "Os campos 'senha' e 'confirmar senha' estão distintos. Por favor, verifique os campos e tente novamente."
                 });
             } else {
-                const response = await createAccount({
-                    name: name,
-                    login: login,
-                    password: password
-                });
-
-                if (response.status !== 201) {
+                try {
+                    await createAccount({
+                        name: name,
+                        login: login,
+                        password: password
+                    });
+                } catch (e) {
                     Modal({
                         title: "Erro ao cadastrar",
-                        text: `O servidor reportou o seguinte erro: ${response.data.message}`
+                        text: `O servidor reportou o seguinte erro: ${e.message}`
                     });
                 }
             }

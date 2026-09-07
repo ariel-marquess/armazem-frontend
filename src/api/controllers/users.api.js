@@ -1,15 +1,18 @@
 import { apiClient } from '../client.js';
 
 export const authenticate = async (login, password) => {
-    return await apiClient.get(`/users?login=${login}&password=${password}`);
+    return await apiClient.post("/auth/login", {
+        login: login,
+        password: password
+    });
 }
 
 export const createAccount = async (user) => {
     // user = {
-    //      name: "Nome",
+    //      name: "nome",
     //      login: "login",
     //      password: "senha"
     // }
 
-    return await apiClient.post('/users', user);
+    await apiClient.post('/users', user);
 }

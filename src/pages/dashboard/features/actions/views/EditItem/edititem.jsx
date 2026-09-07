@@ -3,7 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { parseString } from "../../../../../../utils/util.jsx";
 import style from '../../styles/actions.module.css';
 
-import { update, getById } from "../../../../../../api/controllers/products.api.js";
+import {update, getById} from "../../../../../../api/controllers/products.api.js";
 import { getProduct } from "../../../../../../mocks/controllers/control.js";
 
 import { Header } from "../../../../../../components/layout/Header/header.jsx";
@@ -21,11 +21,10 @@ export function EditItem() {
 
     useEffect(() => {
         try {
-            // setProduct(getById(id).data);
-            setProduct(getProduct(parseInt(id)));
+            getById().then((response) => {setProduct(response.data)});
         } catch (e) {
-            alert("Erro ao buscar o produto.");
-            navigate("/home/verificar-estoque");
+            alert("Erro ao carregar informações.");
+            navigate("/");
         }
     }, [navigate]);
 
@@ -42,17 +41,11 @@ export function EditItem() {
             setBoxVisible(true);
         } else {
             try {
-                const response = await update(product.id, {
-                    "id": product.id,
+                await update(product.id, {
                     "name": name,
                     "quantity": product.quantity,
                     "price": parseFloat(price)
                 });
-
-                if(response.status !== 200){
-                    setError(`Não foi possível concluir a operação: ${response.data.message}`)
-                    setBoxVisible(true);
-                }
             } catch (e) {
                 setError(e)
                 setBoxVisible(true);

@@ -15,11 +15,10 @@ export function RemoveItem() {
 
     useEffect(() => {
         try {
-            // setProduct(getById(id).data);
-            setProduct(getProduct(parseInt(id)));
+            getById().then((response) => {setProduct(response.data)});
         } catch (e) {
-            alert("Erro ao buscar o produto.");
-            handlerExit()
+            alert("Erro ao carregar informações.");
+            navigate("/");
         }
     }, [navigate]);
 

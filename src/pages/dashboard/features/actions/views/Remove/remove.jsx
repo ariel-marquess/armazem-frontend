@@ -24,9 +24,7 @@ export function Remove() {
 
     useEffect(() => {
         try {
-            const response = getProducts();
-            //const response = await getAll();
-            setProducts(response.data);
+            getAll().then((response) => {setProducts(response.data)});
         } catch (e) {
             alert("Erro ao carregar as informações dos produtos.");
             navigate("/");

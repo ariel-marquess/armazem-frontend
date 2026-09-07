@@ -25,17 +25,15 @@ export function Register() {
 
     useEffect(() => {
         try {
-            const response = getLastId();
-            //const response = lastId().then();
-            setId(response.data.id);
+            idGenerator()
         } catch (e) {
-            alert("Erro ao carregar as informações dos produtos.");
+            alert("Erro ao carregar informações.");
             navigate("/");
         }
     }, [navigate]);
 
     function idGenerator() {
-        lastId().then((response) => setId(response.data.id));
+        lastId().then((response) => setId(response.data));
     }
 
     function handlerExit() {
