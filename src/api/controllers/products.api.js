@@ -1,8 +1,5 @@
 import { apiClient } from '../client.js';
 
-const token = localStorage.getItem('token');
-apiClient.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-
 export const getAll = async () => {
     return await apiClient.get('/products');
 }

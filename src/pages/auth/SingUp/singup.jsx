@@ -1,12 +1,12 @@
 import { useState } from "react"
 import { useNavigate } from "react-router-dom";
+import { useModal } from "../../../contexts/ModalContext.jsx";
 import style from './singup.module.css';
 
 import { createAccount } from "../../../api/controllers/users.api.js";
 
 import { Input } from "../../../components/ui/Input/input.jsx";
 import { Button } from "../../../components/ui/Button/button.jsx";
-import { Modal } from "../../../components/ui/Modal/modal.jsx";
 
 export function SingUp() {
     const [name, setName] = useState("");
@@ -16,6 +16,7 @@ export function SingUp() {
 
     const [revealPassword, setRevealPassword] = useState(false);
 
+    const { openModal } = useModal();
     const navigate = useNavigate();
 
     function goLogin() {
@@ -24,30 +25,34 @@ export function SingUp() {
 
     async function create() {
         if (name === "" || login === "" || password === "" || confirmPassword === "") {
-            Modal({
+            openModal({
                 title: "Campos vazios",
                 text: "Existem campos vazios. Por favor, preencha todos os campos."
             });
-        } else {
-            if (password !== confirmPassword){
-                Modal({
-                    title: "Falha de autenticação",
-                    text: "Os campos 'senha' e 'confirmar senha' estão distintos. Por favor, verifique os campos e tente novamente."
-                });
-            } else {
-                try {
-                    await createAccount({
-                        name: name,
-                        login: login,
-                        password: password
-                    });
-                } catch (e) {
-                    Modal({
-                        title: "Erro ao cadastrar",
-                        text: `O servidor reportou o seguinte erro: ${e.message}`
-                    });
-                }
-            }
+            return;
+        }
+
+        if (password !== confirmPassword) {
+            openModal({
+                title: "Falha de autenticação",
+                text: "Os campos 'senha' e 'confirmar senha' estão distintos. Por favor, verifique os campos e tente novamente."
+            });
+            return;
+        }
+
+        try {
+            await createAccount({
+                name: name,
+                login: login,
+                password: password
+            });
+
+            navigate("/");
+        } catch (e) {
+            openModal({
+                title: "Erro ao cadastrar",
+                text: e.response?.data?.message ?? "Não foi possível concluir o cadastro."
+            });
         }
     }
 

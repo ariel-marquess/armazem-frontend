@@ -3,8 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { parseString } from "../../../../../../utils/util.jsx";
 import style from '../../styles/actions.module.css';
 
-import {update, getById} from "../../../../../../api/controllers/products.api.js";
-import { getProduct } from "../../../../../../mocks/controllers/control.js";
+import { update, getById } from "../../../../../../api/controllers/products.api.js";
 
 import { Header } from "../../../../../../components/layout/Header/header.jsx";
 import { Input } from "../../../../../../components/ui/Input/input.jsx";
@@ -20,13 +19,18 @@ export function EditItem() {
     const { id } = useParams();
 
     useEffect(() => {
-        try {
-            getById().then((response) => {setProduct(response.data)});
-        } catch (e) {
-            alert("Erro ao carregar informações.");
-            navigate("/");
+        async function loadProduct() {
+            try {
+                const response = await getById(id);
+                setProduct(response.data);
+            } catch (e) {
+                alert("Erro ao buscar o produto.");
+                navigate("/home/verificar-estoque");
+            }
         }
-    }, [navigate]);
+
+        loadProduct();
+    }, [navigate, id]);
 
     const [name, setName] = useState("");
     const [price, setPrice] = useState("");
@@ -41,11 +45,17 @@ export function EditItem() {
             setBoxVisible(true);
         } else {
             try {
-                await update(product.id, {
+                const response = await update(product.id, {
+                    "id": product.id,
                     "name": name,
                     "quantity": product.quantity,
                     "price": parseFloat(price)
                 });
+
+                if(response.status !== 200){
+                    setError(`Não foi possível concluir a operação: ${response.data.message}`)
+                    setBoxVisible(true);
+                }
             } catch (e) {
                 setError(e)
                 setBoxVisible(true);

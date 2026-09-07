@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 import style from './home.module.css';
 
 import { getAll } from "../../../../../api/controllers/products.api.js";
-import { getProducts } from "../../../../../mocks/controllers/control.js";
 
 import { Header } from "../../../../../components/layout/Header/header.jsx";
 import { Button } from "../../../../../components/ui/Button/button.jsx";
@@ -14,12 +13,16 @@ export function Home() {
     const navigate = useNavigate();
 
     useEffect(() => {
-        try {
-            getAll().then((response) => {setProducts(response.data)});
-        } catch (e) {
-            alert("Erro ao carregar as informações dos produtos.");
-            navigate("/");
+        async function loadProducts() {
+            try {
+                const response = await getAll();
+                setProducts(response.data);
+            } catch (e) {
+                alert("Erro ao carregar as informações dos produtos.");
+                navigate("/");
+            }
         }
+        loadProducts();
     }, [navigate]);
 
     function goRegister() {

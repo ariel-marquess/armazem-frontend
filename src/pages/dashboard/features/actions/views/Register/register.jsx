@@ -4,7 +4,6 @@ import { parseString } from "../../../../../../utils/util.jsx";
 import style from '../../styles/actions.module.css';
 
 import { create, lastId } from "../../../../../../api/controllers/products.api.js";
-import { getLastId } from "../../../../../../mocks/controllers/control.js";
 
 import { Header } from "../../../../../../components/layout/Header/header.jsx";
 import { Input } from "../../../../../../components/ui/Input/input.jsx";
@@ -24,16 +23,21 @@ export function Register() {
     const navigate = useNavigate();
 
     useEffect(() => {
-        try {
-            idGenerator()
-        } catch (e) {
-            alert("Erro ao carregar informações.");
-            navigate("/");
+        async function loadLastId() {
+            try {
+                const response = await lastId();
+                setId(response.data.id);
+            } catch (e) {
+                alert("Erro ao carregar as informações dos produtos.");
+                navigate("/");
+            }
         }
+
+        loadLastId();
     }, [navigate]);
 
     function idGenerator() {
-        lastId().then((response) => setId(response.data));
+        lastId().then((response) => setId(response.data.id));
     }
 
     function handlerExit() {
