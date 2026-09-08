@@ -5,8 +5,6 @@ import style from './login.module.css';
 import image from '../../../assets/armazem.png';
 
 import { authenticate } from '../../../api/controllers/users.api.js';
-import { authUser } from "../../../mocks/controllers/control.js";
-import { setToken } from "../../../store/appStore.js";
 
 import { Input } from '../../../components/ui/Input/input.jsx';
 import { Button } from '../../../components/ui/Button/button.jsx';
@@ -28,21 +26,18 @@ export function Login({}){
                 title: "Campos vazios",
                 text: "Existem campos vazios. Por favor, preencha todos os campos."
             });
-        } else {
-            try {
-                const response = await authenticate(login, password);
-                // const response = authUser(login, password);
+            return;
+        }
 
-                if (response) {
-                    localStorage.setItem("token", response.data.token);
-                    navigate("/home");
-                }
-            } catch (e) {
-                openModal({
-                    title: "Erro ao autenticar",
-                    text: "Ocorreu um erro ao tentar autenticar. Por favor, verifique suas credenciais e tente novamente."
-                });
-            }
+        try {
+            const response = await authenticate(login, password);
+            localStorage.setItem("token", response.data.token);
+            navigate("/home");
+        } catch (e) {
+            openModal({
+                title: "Erro ao autenticar",
+                text: "Ocorreu um erro ao tentar autenticar. Por favor, verifique suas credenciais e tente novamente."
+            });
         }
     }
 

@@ -4,7 +4,6 @@ import { parseString } from "../../../../../../utils/util.jsx";
 import style from '../../styles/actions.module.css';
 
 import { getAll, changeQuantity } from "../../../../../../api/controllers/products.api.js";
-import { getProducts } from "../../../../../../mocks/controllers/control.js";
 
 import { Header } from "../../../../../../components/layout/Header/header.jsx";
 import { Input } from "../../../../../../components/ui/Input/input.jsx";
@@ -23,14 +22,18 @@ export function Add() {
     const navigate = useNavigate();
 
     useEffect(() => {
-        try {
-            getAll().then((response) => {setProducts(response.data)});
-        } catch (e) {
-            alert("Erro ao carregar as informações dos produtos.");
-            navigate("/");
+        async function loadProducts() {
+            try {
+                const response = await getAll();
+                setProducts(response.data);
+            } catch (e) {
+                alert("Erro ao carregar as informações dos produtos.");
+                navigate("/");
+            }
         }
-    }, [navigate]);
 
+        loadProducts();
+    }, [navigate]);
 
     function handlerExit() {
         navigate("/home");
@@ -42,21 +45,16 @@ export function Add() {
             setBoxVisible(true);
         } else {
             try {
-                const response = await changeQuantity(product.id, {
+                await changeQuantity(product.id, {
                     "op": "add",
                     "quantity": parseInt(quantity)
                 });
 
-                if (response.status !== 200) {
-                    setError(`Não foi possível concluir a operação: ${response.data.message}`)
-                    setBoxVisible(true);
-                    return false;
-                }
-
                 return true;
             } catch (e) {
-                setError(e)
+                setError(e.response?.data?.message ?? "Não foi possível concluir a operação.");
                 setBoxVisible(true);
+                return false;
             }
         }
     }

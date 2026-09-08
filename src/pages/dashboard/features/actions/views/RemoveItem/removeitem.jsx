@@ -3,7 +3,6 @@ import { useNavigate, useParams } from "react-router-dom";
 import style from './removeitem.module.css'
 
 import { deleteById, getById } from "../../../../../../api/controllers/products.api.js";
-import { getProduct } from "../../../../../../mocks/controllers/control.js";
 
 import { Button } from "../../../../../../components/ui/Button/button.jsx";
 
@@ -14,21 +13,25 @@ export function RemoveItem() {
     const { id } = useParams();
 
     useEffect(() => {
-        try {
-            getById().then((response) => {setProduct(response.data)});
-        } catch (e) {
-            alert("Erro ao carregar informações.");
-            navigate("/");
+        async function loadProduct() {
+            try {
+                const response = await getById(id);
+                setProduct(response.data);
+            } catch (e) {
+                alert("Erro ao buscar o produto.");
+                navigate("/home/verificar-estoque");
+            }
         }
-    }, [navigate]);
 
-    function handlerDelete() {
+        loadProduct();
+    }, [navigate, id]);
+
+    async function handlerDelete() {
         try {
-            deleteById(product.id).then();
+            await deleteById(product.id);
+            handlerExit();
         } catch (e) {
             alert("Erro ao excluir o produto.");
-        } finally {
-            handlerExit();
         }
     }
 
